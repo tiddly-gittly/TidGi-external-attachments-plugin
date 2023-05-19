@@ -10,7 +10,7 @@ This plugin is a fork of https://github.com/Jermolene/TiddlyWiki5/tree/d4846bae6
 
 ## How to use
 
-Just install it from CPL, and reload page.
+Just install it from [CPL](https://tw-cpl.netlify.app/#Plugin_202305190710119), and reload page.
 
 Then drag&drop file into TidGi will create a skinny tiddler. Try edit that tiddler to find out how this "pointer file" works.
 
