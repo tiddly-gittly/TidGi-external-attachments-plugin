@@ -1,42 +1,27 @@
-# Wikitext plugin template for TiddlyWiki5
+# TidGi External Attachments Plugin
 
-This template will help you automatically package zipped multiple-file plugin for nodejs wiki, and single file JSON plugin for HTML wiki.
+> https://tiddlywiki.com/static/External%2520Attachments%2520Plugin.html
+>
+> The External Attachments Plugin provides support for importing tiddlers as external attachments. That means that instead of importing binary files as self-contained tiddlers, they are imported as "skinny" tiddlers that reference the original file via the \_canonical_uri field. This reduces the size of the wiki and thus improves performance. However, it does mean that the wiki is no longer fully self-contained.
+>
+> This plugin only works when using TiddlyWiki with platforms such as TiddlyDesktop that support the path attribute for imported/dragged files.
 
-## What need to change after apply the template
+This plugin is a fork of https://github.com/Jermolene/TiddlyWiki5/tree/d4846bae6c7e0e529d62cf83d439528ad63aa003/plugins/tiddlywiki/external-attachments
 
-### Basic
+## How to use
 
-1. update `title`, `author` and `description` in the [src/plugin.info](src/plugin.info).
-2. write your plugin tiddlers in the [src/](src/) directory.
-3. tid files just put in the src directory, they will be copy to the plugin automatically.
-   1. You can use folder to organize the files, like `src/filters/` to place the filter tiddlers, and that structure will be preserved in the nodejs multiple-file plugin
-   2. In the JSON plugin, the structure will strictly follow the tiddler title.
-4. update demo site tiddlers in the [demo/](demo/) directory.
-5. update this readme.md
+Just install it from CPL, and reload page.
 
-### Examples
+Then drag&drop file into TidGi will create a skinny tiddler. Try edit that tiddler to find out how this "pointer file" works.
 
-## Development
+### File path
 
-See [tiddly-gittly/Tiddlywiki-WikiText-Plugin-Template](https://github.com/tiddly-gittly/Tiddlywiki-WikiText-Plugin-Template) for detail.
+TidGi supports link and `_canonical_uri` to use `file://` prefix (or `open://`, both works the same), for example:
 
-There are some scripts you can run to boost your development.
+```wikitext
+[ext[Some External File Link with CJK character|file:///Users/linonetwo/Downloads/(OCRed)奖励的惩罚 (（美）科恩著) (Z-Library).pdf]]
 
-After `npm i`:
+[ext[An External Folder Link|file:///Users/linonetwo/Downloads/]]
+```
 
-- `npm run dev` to auto pack the plugin and run a demo site. Your change in the src directory will automatically refresh the site.
-- `npm run dev-html` to see demo site with packed plugin after you finish your development, this can be your final check, this runs slower than `npm run dev`
-
-### After the plugin is complete
-
-#### Publish
-
-Enable github action in your repo (in your github repo - setting - action - general) if it is not allowed, and when you tagging a new version `vx.x.x` in a git commit and push, it will automatically publish to the github release.
-
-#### Demo
-
-You will get a Github Pages demo site automatically after publish. If it is 404, you may need to manually enable Github Pages in your github repo:
-
-Settings - Pages (on left side) - Build and deployment- Source - choose `"Github Actions"`
-
-Next time you trigger a publish, the site will be updated. You can see the site link in Settings - Pages
+So when you drag a file into wiki, `_canonical_uri` created by this plugin will also prefixed by `file://`.

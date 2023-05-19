@@ -1,9 +1,9 @@
 {
-  "title": "$:/plugins/linonetwo/tw-example-plugin",
-  "author": "LinOnetwo",
-  "description": "put your description here, and fill in the author and title above",
-  "core-version": ">=5.1.22",
-  "plugin-type": "plugin",
-  "version": "0.0.1",
-  "list": "readme"
+	"title": "$:/plugins/linonetwo/tidgi-external-attachments",
+	"name": "External Attachments for TidGi app",
+	"description": "External attachments for TidGi Desktop App, drag&drop image/binary file to wiki, and become skinny tiddler (a pointer to actural file). ",
+	"list": "readme settings",
+	"plugin-type": "plugin",
+	"author": "LinOnetwo",
+	"version": "1.0.0
 }
