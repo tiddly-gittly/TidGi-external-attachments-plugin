@@ -1,0 +1,4 @@
+title: $:/plugins/linonetwo/tidgi-external-attachments/contentTree
+caption: {{$:/language/SideBar/Explorer/Caption}}
+
+<<tree "$:/plugins/linonetwo/tidgi-external-attachments/">>

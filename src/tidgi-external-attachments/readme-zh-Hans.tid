@@ -1,0 +1,33 @@
+title: $:/plugins/linonetwo/tidgi-external-attachments/readme/zh-Hans
+
+!! 简介
+
+这个插件提供了把大文件作为「外部附件」导入太记 App，变成「引用条目」的功能。
+
+!! 兼容性
+
+这个插件只在太记 App 桌面版上使用时有效，它支持拖曳导入文件时提供''路径''属性（由应用内的代码提供）。而且还需要应用程序支持 `file://` 协议的链接。
+
+!!! 绝对路径 `file://` 链接
+
+太记支持在链接和 `_canonical_uri` 字段里使用 `file://` 前缀（或 `open://`，两者效果相同）：
+
+```wikitext
+[ext[一个带有中文字符的文件例子|file:///Users/linonetwo/Downloads/(OCRed)奖励的惩罚 (（美）科恩著) (Z-Library).pdf]]
+
+[ext[打开外部文件夹的链接|file:///Users/linonetwo/Downloads/]]
+```
+
+因此，当你把一个文件拖入太记时，这个插件创建的 `_canonical_uri` 也将以 `file://` 为前缀。
+
+!!! 相对路径 `file://` 链接
+
+太记还支持你的 Wiki 文件夹中的相对路径，例如：
+
+```wikitext
+[ext[PDF in the files folder|file://./files/A File.pdf]]
+
+[ext[Open the tiddlers folder|file://./tiddlers/]]
+```
+
+{{$:/plugins/linonetwo/tidgi-external-attachments/settings/zh-Hans-desc}}

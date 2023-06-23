@@ -1,0 +1,11 @@
+title: $:/plugins/linonetwo/tidgi-external-attachments/settings/en-GB
+
+!! Configs
+
+<$checkbox tiddler="$:/config/ExternalAttachments/Enable" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/Enable">Enable importing binary files as external attachments</$link> </$checkbox>
+
+<$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents">Use absolute paths for attachments ''outside'' the Wiki folder (anywhere on the computer)</$link> </$checkbox>
+
+<$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">Use absolute paths for descendent attachments (inside wiki folder)</$link> </$checkbox>
+
+{{$:/plugins/linonetwo/tidgi-external-attachments/settings/en-GB-desc}}

@@ -1,0 +1,13 @@
+title: $:/plugins/linonetwo/tidgi-external-attachments/readme
+
+<$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang">
+
+	<$list filter="[<lang>search[zh]]">
+		{{$:/plugins/linonetwo/tidgi-external-attachments/readme/zh-Hans}}
+	</$list>
+
+	<$list filter="[<lang>!search[zh]]">
+		{{$:/plugins/linonetwo/tidgi-external-attachments/readme/en-GB}}
+	</$list>
+
+</$list>

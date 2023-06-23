@@ -1,0 +1,33 @@
+title: $:/plugins/linonetwo/tidgi-external-attachments/readme/en-GB
+
+!！ Introduction
+
+This plugin provides support for importing tiddlers as external attachments.
+
+!！ Compatibility
+
+This plugin only works when using TiddlyWiki with platforms such as TiddlyDesktop/TidGi Desktop that support the ''path'' attribute for imported/dragged files (provided by app). And also need the app supports `file://` protocol of link.
+
+!!! Absolute `file://` link
+
+TidGi supports link and `_canonical_uri` to use `file://` prefix (or `open://`, both works the same), for example:
+
+```wikitext
+[ext[Some External File Link with CJK character|file:///Users/linonetwo/Downloads/(OCRed)奖励的惩罚 (（美）科恩著) (Z-Library).pdf]]
+
+[ext[An External Folder Link|file:///Users/linonetwo/Downloads/]]
+```
+
+So when you drag a file into TidGi app, `_canonical_uri` created by this plugin will also prefixed by `file://`.
+
+!!! Relative `file://` link
+
+TidGi also supports relative path in your wiki folder, for example:
+
+```wikitext
+[ext[PDF in the files folder|file://./files/A File.pdf]]
+
+[ext[Open the tiddlers folder|file://./tiddlers/]]
+```
+
+{{$:/plugins/linonetwo/tidgi-external-attachments/settings/en-GB-desc}}

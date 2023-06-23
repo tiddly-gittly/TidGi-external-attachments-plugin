@@ -1,0 +1,5 @@
+title: $:/config/ExternalAttachments/
+
+Enable: yes
+UseAbsoluteForDescendents: no
+UseAbsoluteForNonDescendents: yes
