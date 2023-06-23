@@ -1,8 +1,11 @@
 title: $:/plugins/linonetwo/tidgi-external-attachments/settings/en-GB
+caption: ExtAttach
 
 !! Configs
 
 <$checkbox tiddler="$:/config/ExternalAttachments/Enable" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/Enable">Enable importing binary files as external attachments</$link> </$checkbox>
+
+<$checkbox tiddler="$:/config/ExternalAttachments/DisableForImage" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/DisableForImage">Disable this plugin when importing images</$link> </$checkbox>
 
 <$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents">Use absolute paths for attachments ''outside'' the Wiki folder (anywhere on the computer)</$link> </$checkbox>
 

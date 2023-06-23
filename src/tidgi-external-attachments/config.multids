@@ -1,5 +1,6 @@
 title: $:/config/ExternalAttachments/
 
 Enable: yes
+DisableForImage: yes
 UseAbsoluteForDescendents: no
 UseAbsoluteForNonDescendents: yes

@@ -1,8 +1,11 @@
 title: $:/plugins/linonetwo/tidgi-external-attachments/settings/zh-Hans
+caption: 外部附件
 
 !! 配置项
 
 <$checkbox tiddler="$:/config/ExternalAttachments/Enable" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/Enable" >启用本插件，将拖入的二进制文件都作为「引用条目」导入</$link> </$checkbox>
+
+<$checkbox tiddler="$:/config/ExternalAttachments/DisableForImage" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/DisableForImage">在拖入图片时不启用本插件</$link> </$checkbox>
 
 <$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents">为 Wiki 文件夹''外''的附件使用绝对路径（文件在电脑上的任何地方）</$link> </$checkbox>
 

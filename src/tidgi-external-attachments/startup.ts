@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 const ENABLE_EXTERNAL_ATTACHMENTS_TITLE = '$:/config/ExternalAttachments/Enable';
+const DISSABLE_FOR_IMAGE_TITLE = '$:/config/ExternalAttachments/DisableForImage';
 const USE_ABSOLUTE_FOR_DESCENDENTS_TITLE = '$:/config/ExternalAttachments/UseAbsoluteForDescendents';
 const USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE = '$:/config/ExternalAttachments/UseAbsoluteForNonDescendents';
 
@@ -27,6 +28,9 @@ exports.startup = function() {
     const wikiFolderLocation = workspace?.wikiFolderLocation;
     if (!wikiFolderLocation) return;
     $tw.hooks.addHook('th-importing-file', function(info) {
+      const isImage = info.type.startsWith('image');
+      const skipForImage = isImage && $tw.wiki.getTiddlerText(DISSABLE_FOR_IMAGE_TITLE, '') === 'yes';
+      if (skipForImage) return;
       if (info.isBinary && info.file.path && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE, '') === 'yes') {
         let fileCanonicalPath = makePathRelative(info.file.path, wikiFolderLocation, {
           useAbsoluteForNonDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE, '') === 'yes',
