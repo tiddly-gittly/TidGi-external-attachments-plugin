@@ -2,8 +2,6 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/settings/en-GB-desc
 
 !! Config Description
 
-On the TidGi App, you can choose to import the binary file as a 'reference tiddler', which means that the tiddler will refer to the original file via the ''_canonical_uri'' field, while itself will be almost an empty file, thus saving storage space in the Wiki. This reduces the size of the wiki and thus improves performance. However, it does mean that the wiki is no longer fully self-contained.
-
 By default, after dragging a large file into the TidGi App, the 'reference tiddler' will use the 'absolute path' to reference the file. For example, if you drag in a PDF from your Windows desktop, the ''_canonical_uri'' field in the Reference tiddler will be filled in with the path to the PDF on your C drive desktop, so if you open the Wiki on a different computer, or delete the PDF on your desktop, the Reference tiddler in the Wiki will failed to open.
 
 You can choose to use the "relative path" to solve this problem. There is a configuration "Use absolute paths for attachments ''outside'' the Wiki folder", by default is on, it means that drag-in the file on your desktop will use a absolute path reference, but also when drag-in a files in your wiki folder, it will use a relative path reference.

@@ -1,4 +1,4 @@
 title: $:/SiteSubtitle
 type: text/vnd.tiddlywiki
 
-<$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang"><$list filter="[<lang>search[zh]]">现代太微插件开发框架</$list><$list filter="[<lang>!search[zh]]">Modern ~TiddlyWiki  plugin developing framework</$list></$list>
+<$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang"><$list filter="[<lang>search[zh]]">节省 Wiki 的存储空间，并提高加载的性能</$list><$list filter="[<lang>!search[zh]]">reduces the size of the wiki and thus improves performance</$list></$list>
