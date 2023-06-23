@@ -43,3 +43,9 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/readme/zh-Hans
 ```
 
 {{$:/plugins/linonetwo/tidgi-external-attachments/settings/zh-Hans-desc}}
+
+!! 解决问题
+
+!!! 无法加载文件
+
+如果你从 Wiki 文件夹根目录拖进太记的文件无法加载，那么可以试试使用带 `./` 的相对路径。例如进入编辑模式，将 `file://A File.pdf` 这样的路径，改为 `file://./A File.pdf` 这样，可能就修复了。

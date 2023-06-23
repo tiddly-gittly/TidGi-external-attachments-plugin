@@ -12,3 +12,9 @@ caption: ExtAttach
 <$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">Use absolute paths for descendent attachments (inside wiki folder)</$link> </$checkbox>
 
 {{$:/plugins/linonetwo/tidgi-external-attachments/settings/en-GB-desc}}
+
+!! Trouble Shooting
+
+!!! Unable to load a file
+
+If you drag in a file from the root of your Wiki folder and it doesn't load, then try using a relative path with `. /` as a prefix. For example, go into edit mode and change a path from `file://A File.pdf` to a path like `file://./A File.pdf` then it may be fixed.
