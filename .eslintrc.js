@@ -7,5 +7,8 @@ module.exports = {
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
   },
+  rules: {
+    'no-var': 'off',
+  },
   extends: ['eslint-config-tidgi'],
 };
