@@ -1,0 +1,13 @@
+title: $:/plugins/linonetwo/tidgi-external-attachments/settings/settings-caption
+
+\whitespace trim
+
+<$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang">
+	<$list filter="[<lang>search[zh]]">
+		<$transclude tiddler="$:/plugins/linonetwo/tidgi-external-attachments/settings/zh-Hans" field="caption" />
+	</$list>
+
+	<$list filter="[<lang>!search[zh]]">
+		<$transclude tiddler="$:/plugins/linonetwo/tidgi-external-attachments/settings/en-GB" field="caption" />
+	</$list>
+</$list>

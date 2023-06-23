@@ -1,4 +1,6 @@
 title: $:/plugins/linonetwo/tidgi-external-attachments/settings
+tags: $:/tags/ControlPanel/SettingsTab
+caption: {{$:/plugins/linonetwo/tidgi-external-attachments/settings/settings-caption}}
 
 <$list filter="[[$:/language]get[text]removeprefix[$:/languages/]else[en-GB]]" variable="lang">
 
