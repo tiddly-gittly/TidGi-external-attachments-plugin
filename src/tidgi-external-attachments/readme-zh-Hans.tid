@@ -22,9 +22,19 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/readme/zh-Hans
 
 因此，当你把一个文件拖入太记时，这个插件创建的 `_canonical_uri` 也将以 `file://` 为前缀。
 
+这个前缀看起来像是 `file:///`，是因为绝对路径一般以 `/` 开始，再加上 `file://` 的两个斜杠，所以看起来像是三个斜杠。
+
 !!! 相对路径 `file://` 链接
 
-太记还支持你的 Wiki 文件夹中的相对路径，例如：
+太记还支持你的 Wiki 文件夹中的相对路径，以 `file://` 开头并直接跟上文件夹名或文件名，就是相对路径，例如：
+
+```wikitext
+[ext[PDF in the files folder|file://files/A File.pdf]]
+
+[ext[Open the tiddlers folder|file://tiddlers/]]
+```
+
+也可以用 `./` 明显地表示这是一个相对路径：
 
 ```wikitext
 [ext[PDF in the files folder|file://./files/A File.pdf]]

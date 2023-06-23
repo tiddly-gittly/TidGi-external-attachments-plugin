@@ -22,9 +22,19 @@ TidGi supports link and `_canonical_uri` to use `file://` prefix (or `open://`, 
 
 So when you drag a file into TidGi app, `_canonical_uri` created by this plugin will also prefixed by `file://`.
 
+This prefix looks like `file:///` because absolute paths usually start with `/`, plus two slashes for `file://`, so it looks like three slashes.
+
 !!! Relative `file://` link
 
-TidGi also supports relative path in your wiki folder, for example:
+TidGi also supports relative path in your wiki folder. Starting with `file://` and directly followed by a folder name or file name is a relative path, e.g:
+
+```wikitext
+[ext[PDF in the files folder|file://files/A File.pdf]]
+
+[ext[Open the tiddlers folder|file://tiddlers/]]
+```
+
+You can also use `. /` to explicitly indicate that this is a relative path:
 
 ```wikitext
 [ext[PDF in the files folder|file://./files/A File.pdf]]
