@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    meta?: { workspaceID?: string };
+    meta?: () => { workspaceID?: string };
     service?: {
       workspace?: {
         get(workspaceID: string): Promise<

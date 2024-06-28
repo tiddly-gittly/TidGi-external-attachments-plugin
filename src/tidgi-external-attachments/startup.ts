@@ -22,7 +22,7 @@ exports.synchronous = true;
 exports.startup = function() {
   const isTidGi = typeof window !== 'undefined' && window.meta !== undefined && 'workspaceID' in window.meta;
   if (!isTidGi) return;
-  const workspaceID = window?.meta?.workspaceID;
+  const workspaceID = window?.meta?.()?.workspaceID;
   if (!workspaceID) return;
   void window?.service?.workspace?.get(workspaceID).then(workspace => {
     const wikiFolderLocation = workspace?.wikiFolderLocation;
