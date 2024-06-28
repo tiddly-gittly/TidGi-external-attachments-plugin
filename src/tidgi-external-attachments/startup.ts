@@ -20,7 +20,7 @@ exports.after = ['startup'];
 exports.synchronous = true;
 
 exports.startup = function() {
-  const isTidGi = typeof window !== 'undefined' && window.meta !== undefined && 'workspaceID' in window.meta;
+  const isTidGi = typeof window !== 'undefined' && typeof window.meta === 'function';
   if (!isTidGi) return;
   const workspaceID = window?.meta?.()?.workspaceID;
   if (!workspaceID) return;
