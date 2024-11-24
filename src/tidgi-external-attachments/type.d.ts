@@ -10,6 +10,9 @@ declare global {
         >;
       };
     };
+    remote?: {
+      getPathForFile: (file: File) => string;
+    }
   }
 }
 export {};

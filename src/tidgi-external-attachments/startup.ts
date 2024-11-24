@@ -30,9 +30,10 @@ exports.startup = function() {
     $tw.hooks.addHook('th-importing-file', function(info) {
       const isImage = info.type.startsWith('image');
       const skipForImage = isImage && $tw.wiki.getTiddlerText(DISSABLE_FOR_IMAGE_TITLE, '') === 'yes';
-      if (skipForImage) return;
-      if (info.isBinary && info.file.path && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE, '') === 'yes') {
-        let fileCanonicalPath = makePathRelative(info.file.path, wikiFolderLocation, {
+      if (skipForImage) return false;
+      const newPath = window.remote?.getPathForFile?.(info.file as File)
+      if (info.isBinary && newPath && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE, '') === 'yes') {
+        let fileCanonicalPath = makePathRelative(newPath, wikiFolderLocation, {
           useAbsoluteForNonDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE, '') === 'yes',
           useAbsoluteForDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_DESCENDENTS_TITLE, '') === 'yes',
         });
