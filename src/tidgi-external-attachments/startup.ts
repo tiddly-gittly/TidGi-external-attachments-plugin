@@ -38,31 +38,51 @@ function basePath(filePath: string): string {
 }
 
 exports.startup = function() {
-  const isTidGi = typeof window !== 'undefined' && typeof window.meta === 'function';
+  const isTidGi = typeof window !== 'undefined' &&
+    typeof window.meta === 'function';
   if (!isTidGi) return;
   const workspaceID = window?.meta?.()?.workspaceID;
   if (!workspaceID) return;
-  void window?.service?.workspace?.get(workspaceID).then(workspace => {
+  void window?.service?.workspace?.get(workspaceID).then((workspace) => {
     const wikiFolderLocation = workspace?.wikiFolderLocation;
     if (!wikiFolderLocation) return;
     $tw.hooks.addHook('th-importing-file', function(info) {
       const isImage = info.type.startsWith('image');
-      const skipForImage = isImage && $tw.wiki.getTiddlerText(DISSABLE_FOR_IMAGE_TITLE, '') === 'yes';
+      const skipForImage = isImage &&
+        $tw.wiki.getTiddlerText(DISSABLE_FOR_IMAGE_TITLE, '') === 'yes';
       if (skipForImage) return false;
-      let filePath = window.remote?.getPathForFile?.(info.file as File)
-      if (info.isBinary && filePath && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE, '') === 'yes') {
+      let filePath = window.remote?.getPathForFile?.(info.file as File);
+      if (
+        info.isBinary && filePath &&
+        $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE, '') === 'yes'
+      ) {
         // Move file to folder if needed
         if ($tw.wiki.getTiddlerText(MOVE_TO_WIKI_FOLDER_TITLE, '') === 'yes') {
-          const wikiFolderToMove = $tw.wiki.getTiddlerText(WIKI_FOLDER_TO_MOVE_TITLE, '');
+          const wikiFolderToMove = $tw.wiki.getTiddlerText(
+            WIKI_FOLDER_TO_MOVE_TITLE,
+            '',
+          );
           const originalFilePath = filePath;
-          const finalFilePath = joinPaths( wikiFolderLocation, wikiFolderToMove, basePath(filePath));
-          filePath = finalFilePath
-          void window.service?.native?.movePath?.(originalFilePath, finalFilePath, { fileToDir: true });
+          const finalFilePath = joinPaths(
+            wikiFolderLocation,
+            wikiFolderToMove,
+            basePath(filePath),
+          );
+          filePath = finalFilePath;
+          void window.service?.native?.movePath?.(
+            originalFilePath,
+            finalFilePath,
+            { fileToDir: true },
+          );
         }
         // calculate original path or related path after move
         let fileCanonicalPath = makePathRelative(filePath, wikiFolderLocation, {
-          useAbsoluteForNonDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE, '') === 'yes',
-          useAbsoluteForDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_DESCENDENTS_TITLE, '') === 'yes',
+          useAbsoluteForNonDescendents: $tw.wiki.getTiddlerText(
+            USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE,
+            '',
+          ) === 'yes',
+          useAbsoluteForDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_DESCENDENTS_TITLE, '') ===
+            'yes',
         });
         fileCanonicalPath = `file://${fileCanonicalPath}`;
         info.callback([
@@ -95,7 +115,10 @@ rootpath comes from document.location.pathname or wikiFolderLocation with urlenc
 function makePathRelative(
   sourcepath: string,
   rootpath: string,
-  options: { useAbsoluteForDescendents?: boolean; useAbsoluteForNonDescendents?: boolean } = {},
+  options: {
+    useAbsoluteForDescendents?: boolean;
+    useAbsoluteForNonDescendents?: boolean;
+  } = {},
 ) {
   // First we convert the source path from OS-dependent format to generic file:// format
   if ($tw.platform.isWindows) {
@@ -123,23 +146,37 @@ function makePathRelative(
   });
   // Identify any common portion from the start
   let pathPartsCounter = 0;
-  while (pathPartsCounter < sourceParts.length && pathPartsCounter < rootParts.length && sourceParts[pathPartsCounter] === rootParts[pathPartsCounter]) {
+  while (
+    pathPartsCounter < sourceParts.length &&
+    pathPartsCounter < rootParts.length &&
+    sourceParts[pathPartsCounter] === rootParts[pathPartsCounter]
+  ) {
     pathPartsCounter += 1;
   }
   // Use an absolute path if there's no common portion, or if specifically requested
   if (
-    pathPartsCounter === 1 || (options.useAbsoluteForNonDescendents && pathPartsCounter < rootParts.length) ||
+    pathPartsCounter === 1 ||
+    (options.useAbsoluteForNonDescendents &&
+      pathPartsCounter < rootParts.length) ||
     (options.useAbsoluteForDescendents && pathPartsCounter === rootParts.length)
   ) {
     return sourcepath;
   }
   let pathPartOutputCounter = 0;
   // Move up a directory for each directory left in the root
-  for (pathPartOutputCounter = pathPartsCounter; pathPartOutputCounter < rootParts.length - 1; pathPartOutputCounter++) {
+  for (
+    pathPartOutputCounter = pathPartsCounter;
+    pathPartOutputCounter < rootParts.length - 1;
+    pathPartOutputCounter++
+  ) {
     outputParts.push('..');
   }
   // Add on the remaining parts of the source path
-  for (pathPartOutputCounter = pathPartsCounter; pathPartOutputCounter < sourceParts.length; pathPartOutputCounter++) {
+  for (
+    pathPartOutputCounter = pathPartsCounter;
+    pathPartOutputCounter < sourceParts.length;
+    pathPartOutputCounter++
+  ) {
     outputParts.push(sourceParts[pathPartOutputCounter]);
   }
   return outputParts.join('/');
