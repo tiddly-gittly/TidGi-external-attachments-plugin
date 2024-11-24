@@ -2,7 +2,7 @@
   "title": "$:/plugins/linonetwo/tidgi-external-attachments",
   "name": "External Attachments for TidGi app",
   "description": "External attachments for TidGi Desktop App, drag&drop image/binary file to wiki, and become skinny tiddler (a pointer to actural file). ",
-  "list": "readme settings content-tree",
+  "list": "readme settings tree",
   "plugin-type": "plugin",
   "author": "LinOnetwo",
   "version": "1.2.1"

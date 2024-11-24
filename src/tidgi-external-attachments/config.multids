@@ -2,5 +2,7 @@ title: $:/config/ExternalAttachments/
 
 Enable: yes
 DisableForImage: yes
+MoveToWikiFolder: yes
+WikiFolderToMove: files
 UseAbsoluteForDescendents: no
 UseAbsoluteForNonDescendents: yes

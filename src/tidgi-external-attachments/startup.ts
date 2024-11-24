@@ -4,6 +4,8 @@ const ENABLE_EXTERNAL_ATTACHMENTS_TITLE = '$:/config/ExternalAttachments/Enable'
 const DISSABLE_FOR_IMAGE_TITLE = '$:/config/ExternalAttachments/DisableForImage';
 const USE_ABSOLUTE_FOR_DESCENDENTS_TITLE = '$:/config/ExternalAttachments/UseAbsoluteForDescendents';
 const USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE = '$:/config/ExternalAttachments/UseAbsoluteForNonDescendents';
+const MOVE_TO_WIKI_FOLDER_TITLE = '$:/config/ExternalAttachments/MoveToWikiFolder';
+const WIKI_FOLDER_TO_MOVE_TITLE = '$:/config/ExternalAttachments/WikiFolderToMove';
 
 declare var exports: {
   after: string[];
@@ -19,6 +21,22 @@ exports.platforms = ['browser'];
 exports.after = ['startup'];
 exports.synchronous = true;
 
+function joinPaths(...paths: string[]): string {
+  let joinedPath = paths.join('/');
+  if ($tw.platform.isWindows) {
+    joinedPath = joinedPath.replaceAll('/', '\\');
+  }
+  return joinedPath;
+}
+
+function basePath(filePath: string): string {
+  if ($tw.platform.isWindows) {
+    return filePath.split('\\').pop() || '';
+  } else {
+    return filePath.split('/').pop() || '';
+  }
+}
+
 exports.startup = function() {
   const isTidGi = typeof window !== 'undefined' && typeof window.meta === 'function';
   if (!isTidGi) return;
@@ -31,9 +49,18 @@ exports.startup = function() {
       const isImage = info.type.startsWith('image');
       const skipForImage = isImage && $tw.wiki.getTiddlerText(DISSABLE_FOR_IMAGE_TITLE, '') === 'yes';
       if (skipForImage) return false;
-      const newPath = window.remote?.getPathForFile?.(info.file as File)
-      if (info.isBinary && newPath && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE, '') === 'yes') {
-        let fileCanonicalPath = makePathRelative(newPath, wikiFolderLocation, {
+      let filePath = window.remote?.getPathForFile?.(info.file as File)
+      if (info.isBinary && filePath && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE, '') === 'yes') {
+        // Move file to folder if needed
+        if ($tw.wiki.getTiddlerText(MOVE_TO_WIKI_FOLDER_TITLE, '') === 'yes') {
+          const wikiFolderToMove = $tw.wiki.getTiddlerText(WIKI_FOLDER_TO_MOVE_TITLE, '');
+          const originalFilePath = filePath;
+          const finalFilePath = joinPaths( wikiFolderLocation, wikiFolderToMove, basePath(filePath));
+          filePath = finalFilePath
+          void window.service?.native?.movePath?.(originalFilePath, finalFilePath, { fileToDir: true });
+        }
+        // calculate original path or related path after move
+        let fileCanonicalPath = makePathRelative(filePath, wikiFolderLocation, {
           useAbsoluteForNonDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE, '') === 'yes',
           useAbsoluteForDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_DESCENDENTS_TITLE, '') === 'yes',
         });

@@ -7,7 +7,21 @@ caption: ExtAttach
 
 <$checkbox tiddler="$:/config/ExternalAttachments/DisableForImage" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/DisableForImage">Disable this plugin when importing images</$link> </$checkbox>
 
-<$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents">Use absolute paths for attachments ''outside'' the Wiki folder (anywhere on the computer)</$link> </$checkbox>
+<$checkbox tiddler="$:/config/ExternalAttachments/MoveToWikiFolder" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/MoveToWikiFolder">Automatically move imported files to the Wiki folder</$link> </$checkbox>
+
+<%if [{$:/config/ExternalAttachments/MoveToWikiFolder}match[yes]] %>
+
+  <$edit-text tiddler="$:/config/ExternalAttachments/WikiFolderToMove" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" /> Automatically move files to this folder inside the Wiki folder
+
+<% else %>
+
+  <$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents" field="text" checked="yes" unchecked="no" default="no">
+    <$link to="$:/config/ExternalAttachments/UseAbsoluteForNonDescendents">
+      Use absolute paths for attachments ''outside'' the Wiki folder (anywhere on the computer)
+    </$link>
+  </$checkbox>
+
+<% endif %>
 
 <$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">Use absolute paths for descendent attachments (inside wiki folder)</$link> </$checkbox>
 
