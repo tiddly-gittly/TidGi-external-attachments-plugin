@@ -8,7 +8,19 @@ On the TidGi App, you can choose to import the binary large file as a 'reference
 
 !！ Compatibility
 
-This plugin only works when using TiddlyWiki with platforms such as TiddlyDesktop/TidGi Desktop that support the ''path'' attribute for imported/dragged files (provided by app). And also need the app supports `file://` protocol of link.
+This plugin only works when using TiddlyWiki with platforms such as TiddlyDesktop/TidGi Desktop that support the ''path'' attribute for imported/dragged files (provided by app).
+
+!! Attachment
+
+For `_canonical_uri`, it is recommended ''not'' to add the `file://` prefix because the web page does not support the `file://` prefix. Adding it will cause image attachments to fail to load when deployed to the web page blog.
+
+```tid
+_canonical_uri: files/A File.pdf
+```
+
+!! Link
+
+The link needs to add the `file://` prefix so that you can click the link in the Taiji App to directly open the file. Without the prefix, Tiddlywiki cannot recognize it as an external file link and will think it is an internal Wiki link, resulting in failure to open. 
 
 !!! Absolute `file://` link
 
