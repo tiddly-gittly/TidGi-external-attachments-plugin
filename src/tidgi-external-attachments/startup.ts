@@ -84,7 +84,10 @@ exports.startup = function() {
           useAbsoluteForDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_DESCENDENTS_TITLE, '') ===
             'yes',
         });
-        fileCanonicalPath = `file://${fileCanonicalPath}`;
+        // If the path is not relative, add file:// to it to support absolute paths. And TidGi / TiddlyWeb supports relative path like `./files/xxxx.png` out of box.
+        if (!fileCanonicalPath.startsWith('.')) {
+          fileCanonicalPath = `file://${fileCanonicalPath}`;
+        }
         info.callback([
           {
             title: info.file.name,
