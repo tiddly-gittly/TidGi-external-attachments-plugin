@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 
 import { ITiddlerFields, ITiddlerFieldsParam } from 'tiddlywiki';
@@ -57,11 +58,11 @@ exports.startup = function() {
        * ```
        */
       const importData: {
-        tiddlers?: ITiddlerFields;
+        tiddlers?: Record<string, ITiddlerFields>;
       } = $tw.utils.parseJSONSafe(info.fields.text);
-      const tiddlers = importData?.tiddlers ?? {};
+      const tiddlers = importData?.tiddlers ?? {} as Record<string, ITiddlerFields>;
       Object.keys(tiddlers).forEach((title) => {
-        const tiddler = tiddlers[title] as ITiddlerFields;
+        const tiddler = tiddlers[title];
         const { willMoveFromPath, willMoveToPath, ...resultTiddlerFields } = tiddler;
         if (willMoveFromPath && typeof willMoveFromPath === 'string' && willMoveToPath && typeof willMoveToPath === 'string') {
           void window.service?.native?.movePath?.(
@@ -97,51 +98,46 @@ exports.startup = function() {
         $tw.wiki.getTiddlerText(ENABLE_FOR_IMAGE_TITLE, '') === 'no';
       if (skipForImage) return false;
       let filePath = window.remote?.getPathForFile?.(info.file as File);
-      if (
-        info.isBinary && filePath &&
-        $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE, '') === 'yes'
-      ) {
-        // Move file to folder if needed
-        let moveFileMetaData: { willMoveFromPath: string; willMoveToPath: string } | undefined;
-        if ($tw.wiki.getTiddlerText(MOVE_TO_WIKI_FOLDER_TITLE, '') === 'yes') {
-          const wikiFolderToMove = $tw.wiki.getTiddlerText(
-            WIKI_FOLDER_TO_MOVE_TITLE,
-            '',
-          );
-          const willMoveFromPath = filePath;
-          const willMoveToPath = joinPaths(
-            wikiFolderLocation,
-            wikiFolderToMove,
-            basePath(filePath),
-          );
-          filePath = willMoveToPath;
-          moveFileMetaData = { willMoveToPath, willMoveFromPath };
-        }
-        // calculate original path or related path after move
-        const fileCanonicalPath = makePathRelative(filePath, wikiFolderLocation, {
-          useAbsoluteForNonDescendents: $tw.wiki.getTiddlerText(
-            USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE,
-            '',
-          ) === 'yes',
-          useAbsoluteForDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_DESCENDENTS_TITLE, '') ===
-            'yes',
-        });
-        const importingTiddler = {
-          title: info.file.name,
-          type: info.type,
-          _canonical_uri: fileCanonicalPath,
-          // our custom data that pass to th-before-importing
-          willMoveFromPath: moveFileMetaData.willMoveFromPath,
-          willMoveToPath: moveFileMetaData.willMoveToPath,
-        };
-        // If the path is not relative, don't add `file://` to it here, since TidGi / TiddlyWeb supports relative path like `./files/xxxx.png` or simply `files/xxxx.png` out of box. And only TidGi supports `file://` protocol.
-        info.callback([
-          importingTiddler,
-        ]);
-        return true;
-      } else {
-        return false;
+      const enabledForBinary = $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE, '') === 'yes';
+      if (!(info.isBinary && filePath && enabledForBinary)) return false;
+      // Move file to folder if needed
+      let moveFileMetaData: { willMoveFromPath: string; willMoveToPath: string } | undefined;
+      if ($tw.wiki.getTiddlerText(MOVE_TO_WIKI_FOLDER_TITLE, '') === 'yes') {
+        const wikiFolderToMove = $tw.wiki.getTiddlerText(
+          WIKI_FOLDER_TO_MOVE_TITLE,
+          '',
+        );
+        const willMoveFromPath = filePath;
+        const willMoveToPath = joinPaths(
+          wikiFolderLocation,
+          wikiFolderToMove,
+          basePath(filePath),
+        );
+        filePath = willMoveToPath;
+        moveFileMetaData = { willMoveToPath, willMoveFromPath };
       }
+      // calculate original path or related path after move
+      const fileCanonicalPath = makePathRelative(filePath, wikiFolderLocation, {
+        useAbsoluteForNonDescendents: $tw.wiki.getTiddlerText(
+          USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE,
+          '',
+        ) === 'yes',
+        useAbsoluteForDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_DESCENDENTS_TITLE, '') ===
+          'yes',
+      });
+      const importingTiddler = {
+        title: info.file.name,
+        type: info.type,
+        _canonical_uri: fileCanonicalPath,
+        // our custom data that pass to th-before-importing
+        willMoveFromPath: moveFileMetaData?.willMoveFromPath,
+        willMoveToPath: moveFileMetaData?.willMoveToPath,
+      };
+      // If the path is not relative, don't add `file://` to it here, since TidGi / TiddlyWeb supports relative path like `./files/xxxx.png` or simply `files/xxxx.png` out of box. And only TidGi supports `file://` protocol.
+      info.callback([
+        importingTiddler,
+      ]);
+      return true;
     });
   });
 };
