@@ -17,7 +17,7 @@ This plugin intelligently manages large files as "external attachments", creatin
 
 !!! 🖱️ Drag-and-Drop Workflow
 * ✓ Drag files from any location (desktop/downloads)
-* ✓ Auto-generates preview (file size/type)
+* ✓ Auto-generates preview (tiddler fields/file location)
 * ✓ After confirmation:
 ** 🗂️ Auto-moves to `files` directory (if enabled)
 ** 📝 Creates reference tiddler with `_canonical_uri`
@@ -82,4 +82,4 @@ Close this plugin, and the dragged content will be stored directly as tiddlers, 
 | macOS      | ✅           | ✅        | ✅        |
 | Linux      | ✅           | ✅        | ✅        |
 | Web        | ✅           | ❌        | ✅        |
-| Mobile     | ✅           | ❌        | ✅        |
+| Mobile     | ❓           | ❌        | ✅        |
