@@ -11,7 +11,7 @@ caption: 外部附件
 
 <%if [{$:/config/ExternalAttachments/MoveToWikiFolder}match[yes]] %>
 
-  <$edit-text tiddler="$:/config/ExternalAttachments/WikiFolderToMove" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" /> 自动移动文件到 Wiki 文件夹里的这个文件夹里
+  <$edit-text tiddler="$:/config/ExternalAttachments/WikiFolderToMove" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" /> 自动移动文件到 Wiki 文件夹里的这个文件夹里（建议保持用 `files`）。
 
 <% else %>
 
@@ -25,4 +25,8 @@ caption: 外部附件
 
 <$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">使用绝对路径引用 Wiki 文件夹''内''的文件（不推荐开启）</$link> </$checkbox>
 
-{{$:/plugins/linonetwo/tidgi-external-attachments/settings/zh-Hans-desc}}
+!! 推荐配置
+
+* 保持「自动移动文件到 Wiki 文件夹内」开启（默认启用）
+* 保留默认存储目录为 `files` 
+* 始终关闭「为 Wiki 内文件使用绝对路径」

@@ -1,57 +1,85 @@
 title: $:/plugins/linonetwo/tidgi-external-attachments/readme/en-GB
 
-!！ Introduction
+!! 🌟 Core Features
 
-This plugin provides support for importing tiddlers as external attachments.
+This plugin intelligently manages large files as "external attachments", creating lightweight "reference tiddlers" to maintain Wiki performance.
 
-On the TidGi App, you can choose to import the binary large file as a 'reference tiddler', which means that the tiddler will refer to the original file via the ''_canonical_uri'' field, while itself will be almost an empty file, thus saving storage space in the Wiki. This reduces the size of the wiki and thus improves performance. However, it does mean that the wiki is no longer fully self-contained.
-
-!！ Compatibility
-
-This plugin only works when using TiddlyWiki with platforms such as TiddlyDesktop/TidGi Desktop that support the ''path'' attribute for imported/dragged files (provided by app).
-
-!! Attachment
-
-For `_canonical_uri`, it is recommended ''not'' to add the `file://` prefix because the web page does not support the `file://` prefix. Adding it will cause image attachments to fail to load when deployed to the web page blog.
-
-```tid
-_canonical_uri: files/A File.pdf
-```
-
-!! Link
-
-The link needs to add the `file://` prefix so that you can click the link in the Taiji App to directly open the file. Without the prefix, Tiddlywiki cannot recognize it as an external file link and will think it is an internal Wiki link, resulting in failure to open. 
-
-!!! Absolute `file://` link
-
-TidGi supports link and `_canonical_uri` to use `file://` prefix (or `open://`, both works the same), for example:
+!! 🚀 Quick Start
 
 ```wikitext
-[ext[Some External File Link with CJK character|file:///Users/linonetwo/Downloads/(OCRed)奖励的惩罚 (（美）科恩著) (Z-Library).pdf]]
-
-[ext[An External Folder Link|file:///Users/linonetwo/Downloads/]]
+[Drag any file] → [Preview info] → [Click "Import"] → ✅ Done!
 ```
+* 💡 Auto-creates `files` directory
+* 🔗 Generates standardized relative paths
+* 🌍 Fully compatible with web deployment
 
-So when you drag a file into TidGi app, `_canonical_uri` created by this plugin will also prefixed by `file://`.
+!! 🛠 Feature Details
 
-This prefix looks like `file:///` because absolute paths usually start with `/`, plus two slashes for `file://`, so it looks like three slashes.
+!!! 🖱️ Drag-and-Drop Workflow
+* ✓ Drag files from any location (desktop/downloads)
+* ✓ Auto-generates preview (file size/type)
+* ✓ After confirmation:
+** 🗂️ Auto-moves to `files` directory (if enabled)
+** 📝 Creates reference tiddler with `_canonical_uri`
 
-!!! Relative `file://` link
+!!! ⚙️ Path Management Rules
+* ◻︎ Default Mode (Recommended):
+** → Automatically maintains `files` structure
+** → Always uses relative paths (`files/example.pdf`)
+* ◻︎ Advanced Mode (if modified the [[settings|$:/plugins/linonetwo/tidgi-external-attachments/settings]]):
+** → Customizable storage directory
+** → Absolute paths for external files (manual maintenance)
 
-TidGi also supports relative path in your wiki folder. Starting with `file://` and directly followed by a folder name or file name is a relative path, e.g:
+!! ⚠️ Critical Notes
 
+!!! 🔗 Path Compatibility
+* 🚫 Absolute path files:
+** 📌 Local device access only
+** 🌐 Unavailable for web deployment
+** 🔄 Cross-device sync fails
+* ✅ Relative path files:
+** 📦 Supports full-platform sync
+** 🚀 Plug-and-play deployment
+
+!!! ⏳ Operation Timing
+* 🕒 File movement occurs after "Import" click
+* ↩️ Canceling leaves no residual files
+* 🆕 Auto-creates directory on first use
+
+!! 🔗 Extended Usage: External Links
+
+[[📄 View more external link examples|$:/plugins/linonetwo/tidgi-external-attachments/extlink]]
+
+!!! 📎 File Linking Best Practices
 ```wikitext
-[ext[PDF in the files folder|file://files/A File.pdf]]
-
-[ext[Open the tiddlers folder|file://tiddlers/]]
+[ext[📂 Open Folder|file://./files/]]
+[ext[📄 View PDF|file://files/document.pdf]]
 ```
+* 💡 Must include `file://` protocol
+* 🚫 Not supported on web version
 
-You can also use `. /` to explicitly indicate that this is a relative path:
+!!! ❌ Common Mistakes
+* Attachment fields (`_canonical_uri`):
+** 🚫 Should NOT contain `file://` 
+** ✅ Correct: `files/image.jpg`
+* Body links:
+** ✅ Must include `file://`
+** Wrong: `[Link|files/file.pdf]`
 
-```wikitext
-[ext[PDF in the files folder|file://./files/A File.pdf]]
+!! 🧰 Troubleshooting
 
-[ext[Open the tiddlers folder|file://./tiddlers/]]
-```
+| Issue                | Solution                 |
+| Files not moving     | ✔️ Verify "Import" click  |
+| Web version failure  | ✔️ Confirm using `files`  |
+| Cross-device path fail| ✔️ Enable auto-move       |
 
-{{$:/plugins/linonetwo/tidgi-external-attachments/settings/en-GB-desc}}
+!! 🌐 Cross-Platform Support
+
+Close this plugin, and the dragged content will be stored directly as tiddlers, which is the most compatible way but will significantly increase the file size and slow down the startup speed. The following is a compatibility chart.
+
+| Platform   | Attachments | Links     | As Tiddler |
+| Windows    | ✅           | ✅        | ✅        |
+| macOS      | ✅           | ✅        | ✅        |
+| Linux      | ✅           | ✅        | ✅        |
+| Web        | ✅           | ❌        | ✅        |
+| Mobile     | ✅           | ❌        | ✅        |

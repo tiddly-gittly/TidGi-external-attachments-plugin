@@ -11,7 +11,7 @@ caption: ExtAttach
 
 <%if [{$:/config/ExternalAttachments/MoveToWikiFolder}match[yes]] %>
 
-  <$edit-text tiddler="$:/config/ExternalAttachments/WikiFolderToMove" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" /> Automatically move files to this folder inside the Wiki folder
+  <$edit-text tiddler="$:/config/ExternalAttachments/WikiFolderToMove" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" /> Automatically move files to this folder inside the Wiki folder (suggested to keep using `files`).
 
 <% else %>
 
@@ -32,3 +32,9 @@ caption: ExtAttach
 !!! Unable to load a file
 
 If you drag in a file from the root of your Wiki folder and it doesn't load, then try using a relative path with `. /` as a prefix. For example, go into edit mode and change a path from `file://A File.pdf` to a path like `file://./A File.pdf` then it may be fixed.
+
+!! Recommended Configuration
+
+* Keep "Automatically move files to Wiki folder" enabled (default)
+* Retain the default storage directory as `files`
+* Always disable "Use absolute paths for files within Wiki"
