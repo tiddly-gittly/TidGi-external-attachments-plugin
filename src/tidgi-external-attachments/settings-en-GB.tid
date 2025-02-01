@@ -20,10 +20,10 @@ caption: ExtAttach
       Use absolute paths for attachments ''outside'' the Wiki folder (anywhere on the computer)
     </$link>
   </$checkbox>
+  <$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">Use absolute paths for descendent attachments (inside wiki folder)</$link> </$checkbox>
 
 <% endif %>
 
-<$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">Use absolute paths for descendent attachments (inside wiki folder)</$link> </$checkbox>
 
 !! Recommended Configuration
 

@@ -116,14 +116,16 @@ exports.startup = function() {
         filePath = willMoveToPath;
         moveFileMetaData = { willMoveToPath, willMoveFromPath };
       }
+      const useAbsoluteForNonDescendents = $tw.wiki.getTiddlerText(
+        USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE,
+        '',
+      ) === 'yes';
+      const useAbsoluteForDescendents = $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_DESCENDENTS_TITLE, '') ===
+        'yes';
       // calculate original path or related path after move
       const fileCanonicalPath = makePathRelative(filePath, wikiFolderLocation, {
-        useAbsoluteForNonDescendents: $tw.wiki.getTiddlerText(
-          USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE,
-          '',
-        ) === 'yes',
-        useAbsoluteForDescendents: $tw.wiki.getTiddlerText(USE_ABSOLUTE_FOR_DESCENDENTS_TITLE, '') ===
-          'yes',
+        useAbsoluteForNonDescendents,
+        useAbsoluteForDescendents,
       });
       const importingTiddler = {
         title: info.file.name,
@@ -133,7 +135,6 @@ exports.startup = function() {
         willMoveFromPath: moveFileMetaData?.willMoveFromPath,
         willMoveToPath: moveFileMetaData?.willMoveToPath,
       };
-      // If the path is not relative, don't add `file://` to it here, since TidGi / TiddlyWeb supports relative path like `./files/xxxx.png` or simply `files/xxxx.png` out of box. And only TidGi supports `file://` protocol.
       info.callback([
         importingTiddler,
       ]);

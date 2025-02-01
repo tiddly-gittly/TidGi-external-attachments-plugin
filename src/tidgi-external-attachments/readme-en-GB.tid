@@ -60,8 +60,9 @@ This plugin intelligently manages large files as "external attachments", creatin
 
 !!! ❌ Common Mistakes
 * Attachment fields (`_canonical_uri`):
-** 🚫 Should NOT contain `file://` 
+** 🚫 relative paths Should NOT contain `file://` or `./` prefix
 ** ✅ Correct: `files/image.jpg`
+** File links or absolute paths should be prefixed with `file://` (and usually you only use relative paths for attachment)
 * Body links:
 ** ✅ Must include `file://`
 ** Wrong: `[Link|files/file.pdf]`

@@ -61,8 +61,9 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/readme/zh-Hans
 
 !!! ❌ 常见误区
 * 附件字段（`_canonical_uri`）：
-** 🚫 不应包含 `file://` 前缀或 `./` 前缀
+** 🚫 相对路径不应包含 `file://` 前缀或 `./` 前缀
 ** ✅ 正确示例：`_canonical_uri: files/图片.jpg`
+** 文件链接或绝对路径才需要加 `file://` 前缀（而一般你只用得着附件字段里的相对路径）
 * 正文链接：
 ** ✅ 必须包含 `file://` 前缀
 ** 错误示例：`[ext[链接|files/文件.pdf]]`

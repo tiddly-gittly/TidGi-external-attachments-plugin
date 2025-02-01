@@ -20,10 +20,10 @@ caption: 外部附件
       为 Wiki 文件夹''外''的附件使用绝对路径（文件在电脑上的任何地方）
     </$link>
   </$checkbox>
+  <$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">使用绝对路径引用 Wiki 文件夹''内''的文件（不推荐开启）</$link> </$checkbox>
 
 <% endif %>
 
-<$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">使用绝对路径引用 Wiki 文件夹''内''的文件（不推荐开启）</$link> </$checkbox>
 
 !! 推荐配置
 

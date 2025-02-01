@@ -62,7 +62,9 @@ export function makePathRelative(
       pathPartsCounter < rootParts.length) ||
     (options.useAbsoluteForDescendents && pathPartsCounter === rootParts.length)
   ) {
-    return sourcepath;
+    // If the path is not relative, don't add `file://` to it here, since TidGi / TiddlyWeb supports relative path like `./files/xxxx.png` or simply `files/xxxx.png` out of box. And only TidGi supports `file://` protocol.
+    // But if is absolute path, we need to add `file://` to it, because Tiddlywiki don't handle `/` path for global file access.
+    return `file://${sourcepath}`;
   }
   let pathPartOutputCounter = 0;
   // Move up a directory for each directory left in the root
