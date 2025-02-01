@@ -5,7 +5,7 @@ caption: ExtAttach
 
 <$checkbox tiddler="$:/config/ExternalAttachments/Enable" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/Enable">Enable importing binary files as external attachments</$link> </$checkbox>
 
-<$checkbox tiddler="$:/config/ExternalAttachments/DisableForImage" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/DisableForImage">Disable this plugin when importing images</$link> </$checkbox>
+<$checkbox tiddler="$:/config/ExternalAttachments/EnableForImage" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/config/ExternalAttachments/EnableForImage">Importing images as attachments</$link> </$checkbox> If disabled, images will be imported as internal image tiddlers, which increases file size and slows down startup, but improves compatibility.
 
 <$checkbox tiddler="$:/config/ExternalAttachments/MoveToWikiFolder" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/MoveToWikiFolder">Automatically move imported files to the Wiki folder</$link> </$checkbox>
 
@@ -25,16 +25,10 @@ caption: ExtAttach
 
 <$checkbox tiddler="$:/config/ExternalAttachments/UseAbsoluteForDescendents" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/UseAbsoluteForDescendents">Use absolute paths for descendent attachments (inside wiki folder)</$link> </$checkbox>
 
-{{$:/plugins/linonetwo/tidgi-external-attachments/settings/en-GB-desc}}
-
-!! Trouble Shooting
-
-!!! Unable to load a file
-
-If you drag in a file from the root of your Wiki folder and it doesn't load, then try using a relative path with `. /` as a prefix. For example, go into edit mode and change a path from `file://A File.pdf` to a path like `file://./A File.pdf` then it may be fixed.
-
 !! Recommended Configuration
 
 * Keep "Automatically move files to Wiki folder" enabled (default)
 * Retain the default storage directory as `files`
 * Always disable "Use absolute paths for files within Wiki"
+
+Read more in the [[plugin readme|$:/plugins/linonetwo/tidgi-external-attachments/readme]].

@@ -5,7 +5,7 @@ import { basePath, joinPaths, makePathRelative } from './makePathRelative';
 
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 const ENABLE_EXTERNAL_ATTACHMENTS_TITLE = '$:/config/ExternalAttachments/Enable';
-const DISSABLE_FOR_IMAGE_TITLE = '$:/config/ExternalAttachments/DisableForImage';
+const ENABLE_FOR_IMAGE_TITLE = '$:/config/ExternalAttachments/EnableForImage';
 const USE_ABSOLUTE_FOR_DESCENDENTS_TITLE = '$:/config/ExternalAttachments/UseAbsoluteForDescendents';
 const USE_ABSOLUTE_FOR_NON_DESCENDENTS_TITLE = '$:/config/ExternalAttachments/UseAbsoluteForNonDescendents';
 const MOVE_TO_WIKI_FOLDER_TITLE = '$:/config/ExternalAttachments/MoveToWikiFolder';
@@ -94,7 +94,7 @@ exports.startup = function() {
     $tw.hooks.addHook('th-importing-file', function(info) {
       const isImage = info.type.startsWith('image');
       const skipForImage = isImage &&
-        $tw.wiki.getTiddlerText(DISSABLE_FOR_IMAGE_TITLE, '') === 'yes';
+        $tw.wiki.getTiddlerText(ENABLE_FOR_IMAGE_TITLE, '') === 'no';
       if (skipForImage) return false;
       let filePath = window.remote?.getPathForFile?.(info.file as File);
       if (

@@ -5,7 +5,7 @@ caption: 外部附件
 
 <$checkbox tiddler="$:/config/ExternalAttachments/Enable" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/Enable" >启用本插件，将拖入的二进制文件都作为「引用条目」导入</$link> </$checkbox>
 
-<$checkbox tiddler="$:/config/ExternalAttachments/DisableForImage" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/DisableForImage">在拖入图片时不启用本插件</$link> </$checkbox>
+<$checkbox tiddler="$:/config/ExternalAttachments/EnableForImage" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/config/ExternalAttachments/EnableForImage">在拖入图片时也导入为附件</$link> </$checkbox> 如果关闭，则图片会被直接导入为内置的图片条目而不是附件，增大文件体积拖慢启动速度，但提高兼容性。
 
 <$checkbox tiddler="$:/config/ExternalAttachments/MoveToWikiFolder" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/MoveToWikiFolder">自动将拖入的文件移动到 Wiki 文件夹内</$link> </$checkbox>
 
@@ -30,3 +30,5 @@ caption: 外部附件
 * 保持「自动移动文件到 Wiki 文件夹内」开启（默认启用）
 * 保留默认存储目录为 `files` 
 * 始终关闭「为 Wiki 内文件使用绝对路径」
+
+阅读[[插件说明|$:/plugins/linonetwo/tidgi-external-attachments/readme]]了解更多信息。
