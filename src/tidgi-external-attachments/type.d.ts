@@ -1,20 +1,11 @@
 declare global {
   interface Window {
     meta?: () => { workspaceID?: string };
+    remote?: {
+      getPathForFile: (file: File) => string;
+    };
     service?: {
-      workspace?: {
-        get(workspaceID: string): Promise<
-          {
-            wikiFolderLocation: string;
-          } | undefined
-        >;
-      };
       native?: {
-        path(
-          method: "basename" | "dirname" | "join",
-          pathString: string | undefined,
-          ...paths: string[]
-        ): Promise<string | undefined>;
         /**
          * Move a file or directory. The directory can have contents.
          * @param fromFilePath Note that if src is a directory it will copy everything inside of this directory, not the entire directory itself (see fs.extra issue #537).
@@ -27,10 +18,19 @@ declare global {
           toFilePath: string,
           options?: { fileToDir?: boolean },
         ): Promise<false | string>;
+        path(
+          method: 'basename' | 'dirname' | 'join',
+          pathString: string | undefined,
+          ...paths: string[]
+        ): Promise<string | undefined>;
       };
-    };
-    remote?: {
-      getPathForFile: (file: File) => string;
+      workspace?: {
+        get(workspaceID: string): Promise<
+          {
+            wikiFolderLocation: string;
+          } | undefined
+        >;
+      };
     };
   }
 }
