@@ -13,6 +13,24 @@ rootpath comes from document.location.pathname or wikiFolderLocation with urlenc
 	/C:/path/to/file.html for local files on Windows
 	/sharename/path/to/file.html for network shares on Windows
 */
+
+/**
+ * Convert Windows path format to Unix style
+ */
+function unifyWindowsPathAsUnixPath(path: string): string {
+	// For Windows paths: replace backslashes with forward slashes,
+	// add a leading slash if it's a local file like C:/path/to/file.ext,
+	// and remove one of two leading slashes for network shares.
+	path = path.replaceAll('\\', '/');
+	if (path.charAt(0) !== '/') {
+		path = '/' + path;
+	}
+	if (path.substring(0, 2) === '//') {
+		path = path.substring(1);
+	}
+	return path;
+}
+
 export function makePathRelative(
   sourcepath: string,
   rootpath: string,
@@ -24,15 +42,8 @@ export function makePathRelative(
 ) {
   // First we convert the source path from OS-dependent format to generic file:// format
   if (options.isWindows || $tw.platform.isWindows) {
-    sourcepath = sourcepath.replaceAll('\\', '/');
-    // If it's a local file like C:/path/to/file.ext then add a leading slash
-    if (sourcepath.charAt(0) !== '/') {
-      sourcepath = '/' + sourcepath;
-    }
-    // If it's a network share then remove one of the leading slashes
-    if (sourcepath.substring(0, 2) === '//') {
-      sourcepath = sourcepath.substring(1);
-    }
+    sourcepath = unifyWindowsPathAsUnixPath(sourcepath);
+    rootpath = unifyWindowsPathAsUnixPath(rootpath);
   }
   // Split the path into parts
   const sourceParts = sourcepath.split('/');
