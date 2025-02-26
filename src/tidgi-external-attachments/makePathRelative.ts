@@ -18,17 +18,17 @@ rootpath comes from document.location.pathname or wikiFolderLocation with urlenc
  * Convert Windows path format to Unix style
  */
 function unifyWindowsPathAsUnixPath(path: string): string {
-	// For Windows paths: replace backslashes with forward slashes,
-	// add a leading slash if it's a local file like C:/path/to/file.ext,
-	// and remove one of two leading slashes for network shares.
-	path = path.replaceAll('\\', '/');
-	if (path.charAt(0) !== '/') {
-		path = '/' + path;
-	}
-	if (path.substring(0, 2) === '//') {
-		path = path.substring(1);
-	}
-	return path;
+  // For Windows paths: replace backslashes with forward slashes,
+  // add a leading slash if it's a local file like C:/path/to/file.ext,
+  // and remove one of two leading slashes for network shares.
+  path = path.replaceAll('\\', '/');
+  if (path.charAt(0) !== '/') {
+    path = '/' + path;
+  }
+  if (path.substring(0, 2) === '//') {
+    path = path.substring(1);
+  }
+  return path;
 }
 
 export function makePathRelative(
