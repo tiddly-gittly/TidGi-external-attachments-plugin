@@ -9,6 +9,8 @@ caption: 外部附件
 
 <$checkbox tiddler="$:/config/ExternalAttachments/MoveToWikiFolder" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/MoveToWikiFolder">自动将拖入的文件移动到 Wiki 文件夹内</$link> </$checkbox>
 
+<$checkbox tiddler="$:/config/ExternalAttachments/MoveToTrash" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/config/ExternalAttachments/MoveToTrash">删除条目时将关联的外部文件移动到回收站</$link> </$checkbox>
+
 <%if [{$:/config/ExternalAttachments/MoveToWikiFolder}match[yes]] %>
 
   <$edit-text tiddler="$:/config/ExternalAttachments/WikiFolderToMove" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" /> 自动移动文件到 Wiki 文件夹里的这个文件夹里（建议保持用 `files`）。
@@ -30,5 +32,6 @@ caption: 外部附件
 * 保持「自动移动文件到 Wiki 文件夹内」开启（默认启用）
 * 保留默认存储目录为 `files` 
 * 始终关闭「为 Wiki 内文件使用绝对路径」
+* 默认开启「删除条目时移动关联外部文件到回收站」功能，以简化外部应用管理，反正太记有自动git备份可以随时回档
 
 阅读[[插件说明|$:/plugins/linonetwo/tidgi-external-attachments/readme]]了解更多信息。

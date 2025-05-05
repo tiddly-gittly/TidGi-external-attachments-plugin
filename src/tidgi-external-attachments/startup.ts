@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 
 import { handleBeforeImporting } from './handleBeforeImporting';
+import { handleDeletingTiddler } from './handleDeletingTiddler';
 import { handleImportingFile } from './handleImportingFile';
 import { makePathRelative } from './makePathRelative';
 
@@ -50,6 +51,10 @@ exports.startup = function() {
     // Register the hook that's called when the user clicks the Import button in the import dialog
     $tw.hooks.addHook('th-before-importing', function(info) {
       return handleBeforeImporting(info);
+    });
+
+    $tw.hooks.addHook("th-deleting-tiddler", function(tiddler) {
+      return handleDeletingTiddler(tiddler, wikiFolderLocation);
     });
   });
 };

@@ -18,6 +18,12 @@ declare global {
           toFilePath: string,
           options?: { fileToDir?: boolean },
         ): Promise<false | string>;
+        /**
+         * Move a file or directory to the trash bin.
+         * @param filePath The absolute path of the file or directory to move to the trash.
+         * @returns A promise that resolves to true if the operation was successful, false otherwise.
+         */
+        moveToTrash(filePath: string): Promise<boolean>;
         path(
           method: 'basename' | 'dirname' | 'join',
           pathString: string | undefined,

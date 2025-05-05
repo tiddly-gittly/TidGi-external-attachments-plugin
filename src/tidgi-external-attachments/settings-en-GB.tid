@@ -9,6 +9,8 @@ caption: ExtAttach
 
 <$checkbox tiddler="$:/config/ExternalAttachments/MoveToWikiFolder" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/MoveToWikiFolder">Automatically move imported files to the Wiki folder</$link> </$checkbox>
 
+<$checkbox tiddler="$:/config/ExternalAttachments/MoveToTrash" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/ExternalAttachments/MoveToTrash">Move associated external files to trash when deleting tiddlers</$link> </$checkbox>
+
 <%if [{$:/config/ExternalAttachments/MoveToWikiFolder}match[yes]] %>
 
   <$edit-text tiddler="$:/config/ExternalAttachments/WikiFolderToMove" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" /> Automatically move files to this folder inside the Wiki folder (suggested to keep using `files`).
@@ -30,5 +32,6 @@ caption: ExtAttach
 * Keep "Automatically move files to Wiki folder" enabled (default)
 * Retain the default storage directory as `files`
 * Always disable "Use absolute paths for files within Wiki"
+* Default to moving external files to trash when deleting tiddlers to simplify external file management, as TidGi's automatic git backups can restore files at any time.
 
 Read more in the [[plugin readme|$:/plugins/linonetwo/tidgi-external-attachments/readme]].

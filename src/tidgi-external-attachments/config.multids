@@ -6,3 +6,4 @@ MoveToWikiFolder: yes
 WikiFolderToMove: files
 UseAbsoluteForDescendents: no
 UseAbsoluteForNonDescendents: yes
+MoveToTrash: yes
