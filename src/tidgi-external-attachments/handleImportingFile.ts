@@ -44,13 +44,19 @@ export function handleImportingFile(info: ImportFileInfo, wikiFolderLocation: st
       '',
     );
     const willMoveFromPath = filePath;
-    const willMoveToPath = joinPaths(
-      wikiFolderLocation,
-      wikiFolderToMove,
-      basePath(filePath),
-    );
-    filePath = willMoveToPath;
-    moveFileMetaData = { willMoveToPath, willMoveFromPath };
+    const targetFolder = joinPaths(wikiFolderLocation, wikiFolderToMove);
+    const willMoveToPath = joinPaths(targetFolder, basePath(filePath));
+
+    // Check if the file is already in the target location - if so, don't move it
+    // This prevents unnecessary file operations
+    const isAlreadyInTargetLocation = filePath.startsWith(targetFolder);
+
+    if (!isAlreadyInTargetLocation) {
+      // Only set up the move operation if the file isn't already where it needs to be
+      moveFileMetaData = { willMoveToPath, willMoveFromPath };
+      filePath = willMoveToPath; // Update filepath to the eventual destination
+    }
+    // If file is already in target location, keep using original filePath
   }
 
   // Read configuration for path handling
