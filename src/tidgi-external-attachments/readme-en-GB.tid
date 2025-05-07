@@ -21,6 +21,15 @@ This plugin intelligently manages large files as "external attachments", creatin
 * ✓ After confirmation:
 ** 🗂️ Auto-moves to `files` directory (if enabled)
 ** 📝 Creates reference tiddler with `_canonical_uri`
+* ✓ Intelligently detects files from `./files` directory:
+** 🎯 References in-place without moving
+** 📋 Perfect for batch imports with Tiddler Commander field editing
+
+!!! 🗑️ Deletion Management
+* ✓ Automatically handles external files when deleting tiddlers
+* ✓ One-click move associated files to trash
+* ✓ Keeps file system clean and organized
+* ✓ Works with TidGi's automatic Git backups for complete safety
 
 !!! ⚙️ Path Management Rules
 * ◻︎ Default Mode (Recommended):
@@ -45,6 +54,7 @@ This plugin intelligently manages large files as "external attachments", creatin
 * 🕒 File movement occurs after "Import" click
 * ↩️ Canceling leaves no residual files
 * 🆕 Auto-creates directory on first use
+* 🗑️ File deletion occurs when tiddler is deleted (if enabled)
 
 !! 🔗 Extended Usage: External Links
 
@@ -73,6 +83,8 @@ This plugin intelligently manages large files as "external attachments", creatin
 | Files not moving     | ✔️ Verify "Import" click  |
 | Web version failure  | ✔️ Confirm using `files`  |
 | Cross-device path fail| ✔️ Enable auto-move       |
+| Files remain after deletion | ✔️ Verify "Move to trash" is enabled |
+| Need batch import & edit | ✔️ Organize in `files` directory first |
 
 !! 🌐 Cross-Platform Support
 

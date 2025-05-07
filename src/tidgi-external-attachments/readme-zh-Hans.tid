@@ -21,6 +21,15 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/readme/zh-Hans
 * ✓ 点击确认后：
 ** 🗂️ 自动移动至 `files` 目录（若开启）
 ** 📝 创建带 `_canonical_uri` 的引用条目
+* ✓ 智能识别 `./files` 目录下文件：
+** 🎯 直接引用原位置，不移动文件
+** 📋 方便批量导入后用 Tiddler Commander 编辑字段
+
+!!! 🗑️ 删除管理功能
+* ✓ 删除条目时自动处理外部文件
+* ✓ 一键将关联文件移至回收站
+* ✓ 保持文件系统整洁有序
+* ✓ 配合 TidGi 自动 Git 备份，提供完整安全保障
 
 !!! ⚙️ 路径管理规则
 
@@ -46,6 +55,7 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/readme/zh-Hans
 * 🕒 文件移动发生在「导入」按钮点击后
 * ↩️ 取消操作不会产生残留文件
 * 🆕 首次使用自动创建目录结构
+* 🗑️ 文件删除发生在条目删除时（若开启）
 
 !! 🔗 扩展应用：外部链接技巧
 
@@ -74,6 +84,8 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/readme/zh-Hans
 | 文件未移动          | ✔️ 检查是否点击"导入"按钮 |
 | 网页版加载失败      | ✔️ 确认使用默认`files`目录 |
 | 跨设备路径失效      | ✔️ 开启自动移动功能       |
+| 删除条目后文件仍存在 | ✔️ 确认已开启"删除时移至回收站" |
+| 需要批量导入编辑    | ✔️ 先整理到`files`目录后拖入 |
 
 !! 🌐 跨平台支持
 
