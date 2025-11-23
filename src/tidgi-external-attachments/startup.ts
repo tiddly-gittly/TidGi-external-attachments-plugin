@@ -35,7 +35,7 @@ exports.startup = function() {
   if (!isTidGi) return;
 
   // Get workspace ID from TidGi
-  const workspaceID = window?.meta?.()?.workspaceID;
+  const workspaceID = window?.meta?.()?.workspace?.id;
   if (!workspaceID) return;
 
   // Get workspace information from TidGi service
