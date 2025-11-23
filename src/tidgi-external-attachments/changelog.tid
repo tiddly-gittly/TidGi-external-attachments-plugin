@@ -1,0 +1,8 @@
+title: $:/plugins/linonetwo/tidgi-external-attachments/changelog
+
+! Changelog
+
+!! Version 1.7.0
+
+* ''Breaking Change'': Requires TidGi-Desktop version 0.13.0 or higher
+** Updated API usage: replaced `window?.meta?.()?.workspaceID` with `window?.meta?.()?.workspace`
