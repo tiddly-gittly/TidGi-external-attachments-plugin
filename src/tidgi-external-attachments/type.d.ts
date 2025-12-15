@@ -1,6 +1,25 @@
+/**
+ * Minimal IWikiWorkspace interface for plugin usage
+ */
+export interface IWikiWorkspace {
+  id: string;
+  isSubWiki: boolean;
+  mainWikiID: string | null;
+  wikiFolderLocation: string;
+  tagNames: string[];
+  includeTagTree: boolean;
+  fileSystemPathFilterEnable: boolean;
+  fileSystemPathFilter: string | null;
+  order: number;
+}
+
 declare global {
   interface Window {
-    meta?: () => { workspaceID?: string };
+    meta?: () => { 
+      workspace?: { 
+        id: string;
+      };
+    };
     remote?: {
       getPathForFile: (file: File) => string;
     };
@@ -31,11 +50,15 @@ declare global {
         ): Promise<string | undefined>;
       };
       workspace?: {
-        get(workspaceID: string): Promise<
-          {
-            wikiFolderLocation: string;
-          } | undefined
-        >;
+        get(workspaceID: string): Promise<IWikiWorkspace | undefined>;
+        /**
+         * Get all sub-wikis of a main wiki
+         */
+        getSubWorkspacesAsList(workspaceID: string): Promise<IWikiWorkspace[]>;
+        /**
+         * Get all workspaces
+         */
+        getWorkspacesAsList(): Promise<IWikiWorkspace[]>;
       };
     };
   }

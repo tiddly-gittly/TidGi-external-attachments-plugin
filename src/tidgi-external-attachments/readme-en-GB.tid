@@ -39,6 +39,28 @@ This plugin intelligently manages large files as "external attachments", creatin
 ** → Customizable storage directory
 ** → Absolute paths for external files (manual maintenance)
 
+!!! 🏷️ Sub-Wiki Routing Support
+* ✓ Automatically routes files to correct sub-wiki based on tiddler tags
+* ✓ Files saved to matched sub-wiki's `files` directory
+* ✓ Supports the following routing rules (by priority):
+** 🎯 Direct tag matching: Tiddler tags match sub-wiki's tagNames
+** 🌳 Tag tree matching: Recursive tag hierarchy when includeTagTree enabled
+** 🔍 Custom filter: Match using fileSystemPathFilter expressions
+* 💡 Usage steps:
+** → Configure tagNames in TidGi's sub-wiki settings
+** → Example: Set tagNames to `["ProjectA"]` for "Project A" sub-wiki
+** → When importing a file, add tag `ProjectA` in the import dialog
+** → After clicking import, the file automatically moves to "Project A" sub-wiki's files folder
+** → The tiddler is also automatically saved to "Project A" sub-wiki
+* 🔄 Automatic tag change sync:
+** → When you change tags on an existing attachment tiddler, the file automatically moves to the new sub-wiki
+** → `_canonical_uri` path is automatically updated
+** → Tiddler and file always stay in sync
+* ⚠️ Routing notes:
+** → Falls back to main wiki's files directory when no sub-wiki matches
+** → Uses same logic as FileSystemAdaptor
+** → Ensure sub-wikis have tagNames or fileSystemPathFilter configured
+
 !! ⚠️ Critical Notes
 
 !!! 🔗 Path Compatibility

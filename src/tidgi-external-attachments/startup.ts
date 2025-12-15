@@ -5,7 +5,10 @@
 import { handleBeforeImporting } from './handleBeforeImporting';
 import { handleDeletingTiddler } from './handleDeletingTiddler';
 import { handleImportingFile } from './handleImportingFile';
+import { handleSavingTiddler } from './handleSavingTiddler';
 import { makePathRelative } from './makePathRelative';
+import { getWorkspacesWithRouting } from './subwikiRouting';
+import type { IWikiWorkspace } from './type';
 
 declare var exports: {
   after: string[];
@@ -38,19 +41,29 @@ exports.startup = function() {
   const workspaceID = window?.meta?.()?.workspace?.id;
   if (!workspaceID) return;
 
-  // Get workspace information from TidGi service
-  void window?.service?.workspace?.get(workspaceID).then((workspace) => {
+  // Get workspace information and sub-wikis from TidGi service
+  void window?.service?.workspace?.get(workspaceID).then(async (workspace) => {
     const wikiFolderLocation = workspace?.wikiFolderLocation;
     if (!wikiFolderLocation) return;
 
+    // Get all workspaces with routing configuration (main + sub-wikis)
+    const workspacesWithRouting: IWikiWorkspace[] = await getWorkspacesWithRouting(workspaceID);
+
     // Register the hook that's called when files are dragged or selected for import
     $tw.hooks.addHook('th-importing-file', function(info) {
-      return handleImportingFile(info, wikiFolderLocation);
+      return handleImportingFile(info, wikiFolderLocation, workspacesWithRouting);
     });
 
     // Register the hook that's called when the user clicks the Import button in the import dialog
     $tw.hooks.addHook('th-before-importing', function(info) {
-      return handleBeforeImporting(info);
+      return handleBeforeImporting(info, workspacesWithRouting, wikiFolderLocation);
+    });
+
+    // Register the hook that's called when a tiddler is about to be saved
+    // This handles moving external attachment files when tags change
+    $tw.hooks.addHook('th-saving-tiddler', function(tiddler) {
+      const oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
+      return handleSavingTiddler(tiddler, oldTiddler, workspacesWithRouting, wikiFolderLocation);
     });
 
     $tw.hooks.addHook("th-deleting-tiddler", function(tiddler) {

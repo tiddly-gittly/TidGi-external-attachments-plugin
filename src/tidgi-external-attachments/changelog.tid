@@ -2,6 +2,16 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/changelog
 
 ! Changelog
 
+!! Version 1.8.0
+
+* ''Feature'': Sub-wiki routing support
+** Imported files now automatically route to the correct sub-wiki's files folder based on tiddler tags
+** Uses the same routing logic as TidGi's FileSystemAdaptor
+** Supports direct tag matching, tag tree matching (includeTagTree), and custom filter expressions
+** Files are moved to the matched sub-wiki's configured files folder (based on WIKI_FOLDER_TO_MOVE_TITLE)
+* ''Improvement'': Extracted sub-wiki routing logic into reusable utility module
+* ''Enhancement'': Updated type definitions to support workspace service methods
+
 !! Version 1.7.0
 
 * ''Breaking Change'': Requires TidGi-Desktop version 0.13.0 or higher

@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { Tiddler } from 'tiddlywiki';
 import { joinPaths } from './makePathRelative';
-
-// Configuration tiddler title
-const MOVE_TO_TRASH_TITLE = '$:/config/ExternalAttachments/MoveToTrash';
+import { MOVE_TO_TRASH_TITLE } from './config';
 
 /**
  * Handles the 'th-deleting-tiddler' hook which is triggered when a tiddler is being deleted.

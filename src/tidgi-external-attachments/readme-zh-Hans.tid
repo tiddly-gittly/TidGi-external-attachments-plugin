@@ -40,6 +40,29 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/readme/zh-Hans
 ** → 可自定义存储目录
 ** → Wiki外文件使用绝对路径（需手动维护）
 
+!!! 🏷️ 子 Wiki 路由支持
+
+* ✓ 根据条目标签自动路由到对应子 Wiki
+* ✓ 文件自动保存到匹配子 Wiki 的 `files` 目录
+* ✓ 支持以下路由规则（按优先级）：
+** 🎯 直接标签匹配：条目标签匹配子 Wiki 的 tagNames
+** 🌳 标签树匹配：启用 includeTagTree 时支持递归标签层级
+** 🔍 自定义过滤器：使用 fileSystemPathFilter 表达式匹配
+* 💡 使用步骤：
+** → 在 TidGi 设置中配置子 Wiki 的 tagNames
+** → 示例：子 Wiki「项目A」设置 tagNames 为 `["ProjectA"]`
+** → 导入文件时，在导入对话框中添加标签 `ProjectA`
+** → 点击导入后，文件自动移动到「项目A」子 Wiki 的 files 文件夹
+** → 条目也会自动保存到「项目A」子 Wiki
+* 🔄 标签变更自动同步：
+** → 修改已有附件条目的标签时，文件会自动移动到新的子 Wiki
+** → `_canonical_uri` 路径会自动更新
+** → 条目和文件始终保持同步
+* ⚠️ 路由注意事项：
+** → 未匹配到子 Wiki 时，默认保存到主 Wiki 的 files 目录
+** → 子 Wiki 路由使用与 FileSystemAdaptor 相同的逻辑
+** → 确保子 Wiki 已正确配置 tagNames 或 fileSystemPathFilter
+
 !! ⚠️ 重要注意事项
 
 !!! 🔗 路径兼容性
