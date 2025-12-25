@@ -48,6 +48,13 @@ declare global {
           pathString: string | undefined,
           ...paths: string[]
         ): Promise<string | undefined>;
+        /**
+         * Save base64 encoded data to a file.
+         * @param filePath The absolute path where the file should be saved.
+         * @param base64Data The base64 encoded string to save.
+         * @returns A promise that resolves to true if successful, false otherwise.
+         */
+        saveBase64File(filePath: string, base64Data: string): Promise<boolean>;
       };
       workspace?: {
         get(workspaceID: string): Promise<IWikiWorkspace | undefined>;

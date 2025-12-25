@@ -7,6 +7,7 @@ import { handleDeletingTiddler } from './handleDeletingTiddler';
 import { handleImportingFile } from './handleImportingFile';
 import { makePathRelative } from './makePathRelative';
 import { getWorkspacesWithRouting } from './subwikiRouting';
+import { setupConvertToExternalHandler } from './convertToExternalAttachment';
 import type { IWikiWorkspace } from './type';
 
 declare var exports: {
@@ -62,6 +63,9 @@ exports.startup = function() {
     // the backend FileSystemAdaptor.moveExternalAttachmentIfNeeded() method.
     // This ensures the file is moved regardless of how the tiddler is saved
     // (direct tag edit, draft editor, IPC call, etc.)
+
+    // Register the handler for converting embedded binary tiddlers to external attachments
+    setupConvertToExternalHandler(workspacesWithRouting, wikiFolderLocation);
 
     $tw.hooks.addHook("th-deleting-tiddler", function(tiddler) {
       return handleDeletingTiddler(tiddler, wikiFolderLocation);

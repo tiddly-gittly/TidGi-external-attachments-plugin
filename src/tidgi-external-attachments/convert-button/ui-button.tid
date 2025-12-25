@@ -1,0 +1,31 @@
+title: $:/plugins/linonetwo/tidgi-external-attachments/ui/Buttons/ConvertToExternal
+tags: $:/tags/ViewToolbar
+caption: {{$:/plugins/linonetwo/tidgi-external-attachments/ui/Buttons/ConvertToExternal/icon}} {{$:/plugins/linonetwo/tidgi-external-attachments/ui/Buttons/ConvertToExternal/caption}}
+description: {{$:/plugins/linonetwo/tidgi-external-attachments/ui/Buttons/ConvertToExternal/hint}}
+list-before: $:/core/ui/Buttons/permalink
+
+\whitespace trim
+\procedure convert-to-external-attachment-actions()
+<$action-sendmessage
+  $message="tm-convert-to-external-attachment"
+  $param=<<currentTiddler>>
+/>
+\end
+
+<%if [<currentTiddler>is[binary]!has[_canonical_uri]] %>
+  <$button
+    tooltip={{$:/plugins/linonetwo/tidgi-external-attachments/ui/Buttons/ConvertToExternal/hint}}
+    aria-label={{$:/plugins/linonetwo/tidgi-external-attachments/ui/Buttons/ConvertToExternal/caption}}
+    class=<<tv-config-toolbar-class>>
+    actions=<<convert-to-external-attachment-actions>>
+  >
+    <%if [<tv-config-toolbar-icons>match[yes]] %>
+      {{$:/plugins/linonetwo/tidgi-external-attachments/ui/Buttons/ConvertToExternal/icon}}
+    <%endif%>
+    <%if [<tv-config-toolbar-text>match[yes]] %>
+      <span class="tc-btn-text">
+        <$text text={{$:/plugins/linonetwo/tidgi-external-attachments/ui/Buttons/ConvertToExternal/caption}}/>
+      </span>
+    <%endif%>
+  </$button>
+<%endif%>
