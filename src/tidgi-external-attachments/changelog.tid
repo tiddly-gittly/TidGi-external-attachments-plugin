@@ -2,6 +2,15 @@ title: $:/plugins/linonetwo/tidgi-external-attachments/changelog
 
 ! Changelog
 
+!! Version 1.9.0
+
+* ''Breaking Change'': Requires TidGi-Desktop version 0.14.0 or higher
+* ''Architecture Change'': Removed `th-saving-tiddler` hook handler - file movement on tag changes now handled by backend FileSystemAdaptor
+** Backend automatically moves external attachment files when tiddler is routed to different workspace
+** More reliable - works regardless of how tiddler is saved (direct tag edit, draft editor, IPC call, etc.)
+** No frontend/backend duplication - single source of truth
+* ''Plugin Scope'': Now focuses on file import (`th-importing-file`, `th-before-importing`) and deletion (`th-deleting-tiddler`) hooks only
+
 !! Version 1.8.0
 
 * ''Feature'': Sub-wiki routing support

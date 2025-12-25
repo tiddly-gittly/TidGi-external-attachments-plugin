@@ -5,7 +5,6 @@
 import { handleBeforeImporting } from './handleBeforeImporting';
 import { handleDeletingTiddler } from './handleDeletingTiddler';
 import { handleImportingFile } from './handleImportingFile';
-import { handleSavingTiddler } from './handleSavingTiddler';
 import { makePathRelative } from './makePathRelative';
 import { getWorkspacesWithRouting } from './subwikiRouting';
 import type { IWikiWorkspace } from './type';
@@ -59,12 +58,10 @@ exports.startup = function() {
       return handleBeforeImporting(info, workspacesWithRouting, wikiFolderLocation);
     });
 
-    // Register the hook that's called when a tiddler is about to be saved
-    // This handles moving external attachment files when tags change
-    $tw.hooks.addHook('th-saving-tiddler', function(tiddler) {
-      const oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
-      return handleSavingTiddler(tiddler, oldTiddler, workspacesWithRouting, wikiFolderLocation);
-    });
+    // NOTE: Moving external attachment files when tags change is now handled by
+    // the backend FileSystemAdaptor.moveExternalAttachmentIfNeeded() method.
+    // This ensures the file is moved regardless of how the tiddler is saved
+    // (direct tag edit, draft editor, IPC call, etc.)
 
     $tw.hooks.addHook("th-deleting-tiddler", function(tiddler) {
       return handleDeletingTiddler(tiddler, wikiFolderLocation);
