@@ -64,9 +64,10 @@ export async function convertToExternalAttachment(
 
   const targetWikiFolderLocation = matchedWorkspace?.wikiFolderLocation ?? mainWikiFolderLocation;
 
-  // Generate filename from title or use title directly
+  // Generate filename from title
   // Clean up the title to make it filesystem-safe
-  let filename = title;
+  // Replace forward/backward slashes with underscore (like TiddlyWiki does)
+  let filename = title.replace(/\/|\\/g, '_');
   
   // Get file extension from type
   const extensions = Object.keys($tw.config.fileExtensionInfo).filter(
