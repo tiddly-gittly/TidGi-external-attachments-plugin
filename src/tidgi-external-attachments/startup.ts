@@ -1,13 +1,9 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-
+import { setupConvertToExternalHandler } from './convertToExternalAttachment';
 import { handleBeforeImporting } from './handleBeforeImporting';
 import { handleDeletingTiddler } from './handleDeletingTiddler';
 import { handleImportingFile } from './handleImportingFile';
 import { makePathRelative } from './makePathRelative';
 import { getWorkspacesWithRouting } from './subwikiRouting';
-import { setupConvertToExternalHandler } from './convertToExternalAttachment';
 import type { IWikiWorkspace } from './type';
 
 declare var exports: {
@@ -38,11 +34,11 @@ exports.startup = function() {
   if (!isTidGi) return;
 
   // Get workspace ID from TidGi
-  const workspaceID = window?.meta?.()?.workspace?.id;
+  const workspaceID = window.meta?.()?.workspace?.id;
   if (!workspaceID) return;
 
   // Get workspace information and sub-wikis from TidGi service
-  void window?.service?.workspace?.get(workspaceID).then(async (workspace) => {
+  void window.service?.workspace?.get(workspaceID).then(async (workspace) => {
     const wikiFolderLocation = workspace?.wikiFolderLocation;
     if (!wikiFolderLocation) return;
 
@@ -67,7 +63,7 @@ exports.startup = function() {
     // Register the handler for converting embedded binary tiddlers to external attachments
     setupConvertToExternalHandler(workspacesWithRouting, wikiFolderLocation);
 
-    $tw.hooks.addHook("th-deleting-tiddler", function(tiddler) {
+    $tw.hooks.addHook('th-deleting-tiddler', function(tiddler) {
       return handleDeletingTiddler(tiddler, wikiFolderLocation);
     });
   });

@@ -15,11 +15,11 @@ export interface IWikiWorkspace {
 
 declare global {
   interface Window {
-    meta?: () => { 
-      workspace?: { 
+    meta?: () => {
+      workspace?: {
         id: string;
       };
-    };
+    } | undefined;
     remote?: {
       getPathForFile: (file: File) => string;
     };
